@@ -1,0 +1,175 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getSiteName, getKeyword, getDomain, getSiteURL } from '../lib/site-config';
+
+const siteName = getSiteName();
+const keyword = getKeyword();
+const domain = getDomain();
+const siteURL = getSiteURL();
+
+const title = `Contact Us - Get Help With Your ${keyword} Application`;
+const description = `Need help with your free government phone application? Contact Test Unique Site 1 for immediate assistance. Get support for Lifeline and ACP programs today.`;
+const canonicalURL = `${siteURL}/contact`;
+
+const jsonLD = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": title,
+  "description": description,
+  "url": canonicalURL,
+  "mainEntity": {
+    "@type": "Organization",
+    "name": siteName,
+    "url": siteURL,
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "availableLanguage": "English"
+    }
+  }
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does it take to get my free government phone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most approved applicants receive their free government phone within 7-10 business days after approval. Some carriers may deliver faster."
+      }
+    },
+    {
+      "@type": "Question", 
+      "name": "What documents do I need to apply?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You'll need proof of income or participation in qualifying programs like SNAP, Medicaid, or SSI. A valid ID is also required."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I keep my current phone number?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, you can transfer your existing phone number to your new free government phone in most cases. Contact your new carrier to arrange the transfer."
+      }
+    }
+  ]
+};
+---
+
+<Layout 
+  title={title} 
+  description={description} 
+  canonicalURL={canonicalURL}
+  jsonLD={[jsonLD, faqSchema]}
+>
+  <main class="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+    <!-- Breadcrumb -->
+    <nav class="bg-white shadow-sm border-b" aria-label="Breadcrumb">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center space-x-2 py-4 text-sm">
+          <a href="/" class="text-[var(--color-primary)] hover:underline">Home</a>
+          <span class="text-gray-500">›</span>
+          <span class="text-gray-700">Contact</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header Section -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Free Government Phone</h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Need help with your application or have questions about getting your free phone? Our support team is here to help you every step of the way.
+        </p>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      <div class="grid lg:grid-cols-2 gap-12">
+        
+        <!-- Contact Form -->
+        <div class="bg-white rounded-2xl shadow-xl p-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Get Help Now</h2>
+          <form class="space-y-6">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+              <input type="text" id="name" name="name" required 
+                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent">
+            </div>
+            
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+              <input type="email" id="email" name="email" required 
+                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent">
+            </div>
+            
+            <div>
+              <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+              <input type="tel" id="phone" name="phone" 
+                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent">
+            </div>
+            
+            <div>
+              <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">What can we help you with?</label>
+              <select id="subject" name="subject" required 
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent">
+                <option value="">Select a topic</option>
+                <option value="application">Application Help</option>
+                <option value="eligibility">Check Eligibility</option>
+                <option value="device">Phone or Service Issues</option>
+                <option value="transfer">Number Transfer</option>
+                <option value="other">Other Questions</option>
+              </select>
+            </div>
+            
+            <div>
+              <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+              <textarea id="message" name="message" rows="4" required 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
+                        placeholder="Tell us more about how we can help you..."></textarea>
+            </div>
+            
+            <button type="submit" 
+                    class="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-bold py-3 px-6 rounded-xl shadow-lg w-full">
+              Send Message
+            </button>
+          </form>
+        </div>
+
+        <!-- Content and Other Ways to Reach -->
+        <div class="space-y-8">
+          <!-- SEO Content -->
+          <div class="bg-white rounded-2xl shadow-xl p-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Why Choose Test Unique Site 1</h2>
+            <div class="prose prose-lg text-gray-600">
+              <p>Getting your Free Government Phone shouldn't be complicated. At Test Unique Site 1, we streamline the entire process to help you access the communication services you need. Our platform connects you directly with approved carriers offering genuine government assistance programs.</p>
+              
+              <p>We understand that navigating government assistance programs can feel overwhelming. That's why our team provides personalized support throughout your Free Government Phone application process. Whether you're applying for Lifeline benefits or the Affordable Connectivity Program, we're here to guide you every step of the way.</p>
+              
+              <p>Many people don't realize they qualify for a Free Government Phone until they check their eligibility. If you receive benefits like SNAP, Medicaid, or housing assistance, you likely qualify for free phone service and a smartphone at no cost. Our quick eligibility check takes just minutes and connects you with the right carrier for your needs.</p>
+              
+              <p>Test Unique Site 1 works exclusively with FCC-approved carriers who provide reliable service nationwide. Your Free Government Phone comes with unlimited talk and text, plus monthly data allowances to keep you connected. No hidden fees, no credit checks, and no long-term contracts required.</p>
+              
+              <p>Don't let communication barriers hold you back. Start your Free Government Phone application today and join millions of Americans who already benefit from these essential programs. Our support team is standing by to answer your questions and help you get connected.</p>
+            </div>
+            
+            <div class="mt-8">
+              <a href="/apply" 
+                 class="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-bold py-3 px-6 rounded-xl shadow-lg inline-block">
+                Start Application Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Other Ways to Reach -->
+          <div class="bg-white rounded-2xl shadow-xl p-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Other Ways to Get Help</h2>
+            <div class="space-y-4">
+              <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
+                <div class="w

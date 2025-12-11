@@ -1,0 +1,45 @@
+---
+/**
+ * Hero Selector Component
+ * Dynamically selects hero variant based on Design DNA configuration
+ * 
+ * Basic mode: Uses EligibilityHero (light, colorful background)
+ * Advanced mode: Uses one of 5 hero variants based on advancedLayout.heroVariant:
+ *   - centered (default) -> HeroAdvanced
+ *   - split-left -> HeroSplitLeft
+ *   - diagonal -> HeroDiagonal
+ *   - wave -> HeroWave
+ *   - gradient-mesh -> HeroGradientMesh
+ */
+import { getDesignDNA } from '../lib/site-config';
+
+// Import all hero variants
+import EligibilityHero from './EligibilityHero.astro';
+import HeroAdvanced from './advanced/HeroAdvanced.astro';
+import HeroSplitLeft from './advanced/HeroSplitLeft.astro';
+import HeroDiagonal from './advanced/HeroDiagonal.astro';
+import HeroWave from './advanced/HeroWave.astro';
+import HeroGradientMesh from './advanced/HeroGradientMesh.astro';
+
+// Props (accept custom H1 from parent)
+interface Props {
+  customH1?: string;
+}
+const { customH1 } = Astro.props;
+
+const designDNA = getDesignDNA();
+const isAdvanced = designDNA.designStyle === 'advanced';
+
+// Get hero variant from advancedLayout, default to 'centered'
+const heroVariant = designDNA.advancedLayout?.heroVariant || 'centered';
+---
+
+{!isAdvanced && <EligibilityHero customH1={customH1} />}
+{isAdvanced && heroVariant === 'centered' && <HeroAdvanced />}
+{isAdvanced && heroVariant === 'split-left' && <HeroSplitLeft />}
+{isAdvanced && heroVariant === 'split-right' && <HeroSplitLeft />}
+{isAdvanced && heroVariant === 'diagonal' && <HeroDiagonal />}
+{isAdvanced && heroVariant === 'wave' && <HeroWave />}
+{isAdvanced && heroVariant === 'gradient-mesh' && <HeroGradientMesh />}
+{isAdvanced && heroVariant === 'card-overlay' && <HeroAdvanced />}
+{isAdvanced && heroVariant === 'minimal' && <HeroAdvanced />}

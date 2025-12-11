@@ -1,0 +1,39 @@
+{
+  "domain": "test-unique-1.com",
+  "siteName": "Test Unique Site 1",
+  "keyword": "Free Government Phone",
+  "ownerEmail": "test@example.com",
+  "designStyle": "advanced",
+  "designDNA": {
+    "colors": {
+      "primary": "#1E3A8A",
+      "secondary": "#374151",
+      "accent": "#DC2626",
+      "background": "#F8FAFC",
+      "text": "#1F2937",
+      "textOnPrimary": "#FFFFFF"
+    },
+    "typography": {
+      "heading": "Playfair Display",
+      "body": "Source Serif Pro"
+    },
+    "shape": {
+      "buttonStyle": "rounded",
+      "cardStyle": "bordered",
+      "borderRadius": 8
+    },
+    "visualStyle": "editorial",
+    "advancedLayout": {
+      "heroVariant": "centered",
+      "cardLayout": "alternating",
+      "navStyle": "centered-logo",
+      "footerStyle": "simple",
+      "borderRadius": "small",
+      "shadowStyle": "subtle",
+      "spacing": "balanced"
+    }
+  },
+  "environment": "production",
+  "createdAt": "2025-12-11T16:47:20.621Z",
+  "version": "1.0.0"
+}

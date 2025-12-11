@@ -1,0 +1,538 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AboveFoldCTA from '../components/AboveFoldCTA.astro';
+import { getSiteURL, getDomain, getSiteName, getKeywordId } from '../lib/site-config';
+import { loadKeywordVariations } from '../lib/variations/shared/keyword-loader';
+
+const SITE_URL = getSiteURL();
+const domain = getDomain();
+const siteName = getSiteName();
+const keywordId = getKeywordId(); // Already has fallback in getKeywordId() function
+
+// Load keyword-specific variations with comprehensive error handling
+let h1Content = { h1: 'Top Free Government Phone Providers' };
+let metaContent = { 
+  title: 'Free Government Phone Service Providers | Approved Lifeline & ACP Carriers',
+  description: 'Discover approved federal communication service providers offering Lifeline and ACP benefits. Compare carriers with nationwide coverage, unlimited data plans, and free device options.'
+};
+
+try {
+  const keywordModule = await loadKeywordVariations(keywordId);
+  
+  if (keywordModule && typeof keywordModule.getH1Variation === 'function' && typeof keywordModule.getMetaVariations === 'function') {
+    try {
+      h1Content = keywordModule.getH1Variation(domain, 'providers');
+      metaContent = keywordModule.getMetaVariations(siteName, domain, 'providers');
+      
+      // Validate results
+      if (!h1Content || !h1Content.h1) {
+        h1Content = { h1: 'Top Free Government Phone Providers' };
+      }
+      if (!metaContent || !metaContent.title || !metaContent.description) {
+        metaContent = { 
+          title: 'Free Government Phone Service Providers | Approved Lifeline & ACP Carriers',
+          description: 'Discover approved federal communication service providers offering Lifeline and ACP benefits. Compare carriers with nationwide coverage, unlimited data plans, and free device options.'
+        };
+      }
+    } catch (variationError: any) {
+      console.error('Error calling variation functions:', variationError?.message || variationError);
+      // Use fallback values already set above
+    }
+  } else {
+    console.warn('Variation functions not available, using fallback content');
+  }
+} catch (e: any) {
+  console.error('Failed to load keyword variations for providers page:', e?.message || e);
+  // Use fallback values already set above - page will still render
+}
+
+const title = metaContent.title;
+const description = metaContent.description;
+const canonical = `${SITE_URL}/providers`;
+---
+
+<Layout title={title} description={description} canonical={canonical}>
+  <main class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 text-white py-8">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-gray-900 text-4xl md:text-6xl font-bold mb-6 ">
+          {h1Content.h1}
+        </h1>
+        <p class="text-gray-900 text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+          Choose from leading carriers offering free communication service through 
+          Lifeline and ACP programs. Compare coverage, features, and benefits.
+        </p>
+        <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
+          <p class="text-gray-900 text-lg mb-4 ">Provider Benefits</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+            <div class="flex items-center">
+              <span class="text-green-400 mr-2">✓</span>
+              <span>Nationwide coverage</span>
+            </div>
+            <div class="flex items-center">
+              <span class="text-green-400 mr-2">✓</span>
+              <span>Unlimited data plans</span>
+            </div>
+            <div class="flex items-center">
+              <span class="text-green-400 mr-2">✓</span>
+              <span>Free smartphones</span>
+            </div>
+            <div class="flex items-center">
+              <span class="text-green-400 mr-2">✓</span>
+              <span>No contracts</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Above Fold -->
+    <AboveFoldCTA context="providers" />
+
+    <!-- Featured Providers -->
+    <section class="py-10">
+      <div class="container mx-auto px-4">
+        <h2 class="text-gray-900 text-3xl md:text-4xl font-bold text-center mb-8 ">
+          Featured Free Government Phone Providers
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Provider 1 -->
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 flex flex-col h-full">
+            <div class="bg-blue-600 text-white p-6 text-center">
+              <h3 class="text-gray-900 text-xl font-bold mb-2 ">Assurance Wireless</h3>
+              <p class="text-blue-100 text-sm">Lifeline & ACP Provider</p>
+            </div>
+            <div class="p-6 flex flex-col flex-grow">
+              <div class="flex items-center mb-4 text-gray-900">
+                <span class="text-gray-900 text-2xl mr-3 flex-shrink-0">📱</span>
+                <div class="flex-1">
+                  <h4 class="text-gray-900 font-semibold text-sm ">Free Smartphone</h4>
+                  <p class="text-gray-900 text-xs ">Latest Android device included</p>
+                </div>
+              </div>
+              <div class="flex items-center mb-4 text-gray-900">
+                <span class="text-gray-900 text-2xl mr-3 flex-shrink-0">🌐</span>
+                <div class="flex-1">
+                  <h4 class="text-gray-900 font-semibold text-sm ">Unlimited Data</h4>
+                  <p class="text-gray-900 text-xs ">High-speed internet access</p>
+                </div>
+              </div>
+              <div class="flex items-center mb-6 text-gray-900">
+                <span class="text-gray-900 text-2xl mr-3 flex-shrink-0">📞</span>
+                <div class="flex-1">
+                  <h4 class="text-gray-900 font-semibold text-sm ">Unlimited Talk & Text</h4>
+                  <p class="text-gray-900 text-xs ">Nationwide calling & messaging</p>
+                </div>
+              </div>
+              <a href="/apply" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg text-center block transition duration-300 no-underline mt-auto">
+                Apply Now
+              </a>
+              <a href="/lifeline-program" class="text-xs text-blue-600 hover:underline mt-2 text-center block">Learn about Lifeline →</a>
+            </div>
+          </div>
+
+          <!-- Provider 2 -->
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 flex flex-col h-full">
+            <div class="bg-green-600 text-white p-6 text-center">
+              <h3 class="text-gray-900 text-xl font-bold mb-2 ">SafeLink Wireless</h3>
+              <p class="text-green-100 text-sm">Lifeline & ACP Provider</p>
+            </div>
+            <div class="p-6 flex flex-col flex-grow">
+              <div class="flex items-center mb-4 text-gray-900">
+                <span class="text-gray-900 text-2xl mr-3 flex-shrink-0">📱</span>
+                <div class="flex-1">
+                  <h4 class="text-gray-900 font-semibold text-sm ">Free Smartphone</h4>
+                  <p class="text-gray-900 text-xs ">Quality Android smartphone</p>
+                </div>
+              </div>
+              <div class="flex items-center mb-4 text-gray-900">
+                <span class="text-gray-900 text-2xl mr-3 flex-shrink-0">🌐</span>
+                <div class="flex-1">
+                  <h4 class="text-gray-900 font-semibold text-sm ">Unlimited Data</h4>
+                  <p class="text-gray-900 text-xs ">Fast 4G LTE network</p>
+                </div>
+              </div>
+              <div class="flex items-center mb-6 text-gray-900">
+                <span class="text-gray-900 text-2xl mr-3 flex-shrink-0">📞</span>
+                <div class="flex-1">
+                  <h4 class="text-gray-900 font-semibold text-sm ">Unlimited Talk & Text</h4>
+                  <p class="text-gray-900 text-xs ">Reliable nationwide service</p>
+                </div>
+              </div>
+              <a href="/apply" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg text-center block transition duration-300 no-underline mt-auto">
+                Apply Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Provider 3 -->
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 flex flex-col h-full">
+            <div class="bg-purple-600 text-white p-6 text-center">
+              <h3 class="text-gray-900 text-xl font-bold mb-2 ">Q Link Wireless</h3>
+              <p class="text-purple-100 text-sm">Lifeline & ACP Provider</p>
+            </div>
+            <div class="p-6 flex flex-col flex-grow">
+              <div class="flex items-center mb-4 text-gray-900">
+                <span class="text-gray-900 text-2xl mr-3 flex-shrink-0">📱</span>
+                <div class="flex-1">
+                  <h4 class="text-gray-900 font-semibold text-sm ">Free Smartphone</h4>
+                  <p class="text-gray-900 text-xs ">Modern Android device</p>
+                </div>
+              </div>
+              <div class="flex items-center mb-4 text-gray-900">
+                <span class="text-gray-900 text-2xl mr-3 flex-shrink-0">🌐</span>
+                <div class="flex-1">
+                  <h4 class="text-gray-900 font-semibold text-sm ">Unlimited Data</h4>
+                  <p class="text-gray-900 text-xs ">High-speed mobile internet</p>
+                </div>
+              </div>
+              <div class="flex items-center mb-6 text-gray-900">
+                <span class="text-gray-900 text-2xl mr-3 flex-shrink-0">📞</span>
+                <div class="flex-1">
+                  <h4 class="text-gray-900 font-semibold text-sm ">Unlimited Talk & Text</h4>
+                  <p class="text-gray-900 text-xs ">Crystal clear calls</p>
+                </div>
+              </div>
+              <a href="/apply" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-lg text-center block transition duration-300 no-underline mt-auto">
+                Apply Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Provider 4 -->
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 flex flex-col h-full">
+            <div class="bg-orange-600 text-white p-6 text-center">
+              <h3 class="text-gray-900 text-xl font-bold mb-2 ">TruConnect</h3>
+              <p class="text-orange-100 text-sm">Lifeline & ACP Provider</p>
+            </div>
+            <div class="p-6 flex flex-col flex-grow">
+              <div class="flex items-center mb-4 text-gray-900">
+                <span class="text-gray-900 text-2xl mr-3 flex-shrink-0">📱</span>
+                <div class="flex-1">
+                  <h4 class="text-gray-900 font-semibold text-sm ">Free Smartphone</h4>
+                  <p class="text-gray-900 text-xs ">Premium Android device</p>
+                </div>
+              </div>
+              <div class="flex items-center mb-4 text-gray-900">
+                <span class="text-gray-900 text-2xl mr-3 flex-shrink-0">🌐</span>
+                <div class="flex-1">
+                  <h4 class="text-gray-900 font-semibold text-sm ">Unlimited Data</h4>
+                  <p class="text-gray-900 text-xs ">5G network coverage</p>
+                </div>
+              </div>
+              <div class="flex items-center mb-6 text-gray-900">
+                <span class="text-gray-900 text-2xl mr-3 flex-shrink-0">📞</span>
+                <div class="flex-1">
+                  <h4 class="text-gray-900 font-semibold text-sm ">Unlimited Talk & Text</h4>
+                  <p class="text-gray-900 text-xs ">Advanced calling features</p>
+                </div>
+              </div>
+              <a href="/apply" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-4 rounded-lg text-center block transition duration-300 no-underline mt-auto">
+                Apply Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Provider 5 -->
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 flex flex-col h-full">
+            <div class="bg-red-600 text-white p-6 text-center">
+              <h3 class="text-gray-900 text-xl font-bold mb-2 ">Access Wireless</h3>
+              <p class="text-red-100 text-sm">Lifeline & ACP Provider</p>
+            </div>
+            <div class="p-6 flex flex-col flex-grow">
+              <div class="flex items-center mb-4 text-gray-900">
+                <span class="text-gray-900 text-2xl mr-3 flex-shrink-0">📱</span>
+                <div class="flex-1">
+                  <h4 class="text-gray-900 font-semibold text-sm ">Free Smartphone</h4>
+                  <p class="text-gray-900 text-xs ">Reliable Android phone</p>
+                </div>
+              </div>
+              <div class="flex items-center mb-4 text-gray-900">
+                <span class="text-gray-900 text-2xl mr-3 flex-shrink-0">🌐</span>
+                <div class="flex-1">
+                  <h4 class="text-gray-900 font-semibold text-sm ">Unlimited Data</h4>
+                  <p class="text-gray-900 text-xs ">Fast mobile internet</p>
+                </div>
+              </div>
+              <div class="flex items-center mb-6 text-gray-900">
+                <span class="text-gray-900 text-2xl mr-3 flex-shrink-0">📞</span>
+                <div class="flex-1">
+                  <h4 class="text-gray-900 font-semibold text-sm ">Unlimited Talk & Text</h4>
+                  <p class="text-gray-900 text-xs ">Nationwide coverage</p>
+                </div>
+              </div>
+              <a href="/apply" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg text-center block transition duration-300 no-underline mt-auto">
+                Apply Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Provider 6 -->
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 flex flex-col h-full">
+            <div class="bg-teal-600 text-white p-6 text-center">
+              <h3 class="text-gray-900 text-xl font-bold mb-2 ">Life Wireless</h3>
+              <p class="text-teal-100 text-sm">Lifeline & ACP Provider</p>
+            </div>
+            <div class="p-6 flex flex-col flex-grow">
+              <div class="flex items-center mb-4 text-gray-900">
+                <span class="text-gray-900 text-2xl mr-3 flex-shrink-0">📱</span>
+                <div class="flex-1">
+                  <h4 class="text-gray-900 font-semibold text-sm ">Free Smartphone</h4>
+                  <p class="text-gray-900 text-xs ">Quality mobile device</p>
+                </div>
+              </div>
+              <div class="flex items-center mb-4 text-gray-900">
+                <span class="text-gray-900 text-2xl mr-3 flex-shrink-0">🌐</span>
+                <div class="flex-1">
+                  <h4 class="text-gray-900 font-semibold text-sm ">Unlimited Data</h4>
+                  <p class="text-gray-900 text-xs ">Reliable internet access</p>
+                </div>
+              </div>
+              <div class="flex items-center mb-6 text-gray-900">
+                <span class="text-gray-900 text-2xl mr-3 flex-shrink-0">📞</span>
+                <div class="flex-1">
+                  <h4 class="text-gray-900 font-semibold text-sm ">Unlimited Talk & Text</h4>
+                  <p class="text-gray-900 text-xs ">Clear communication</p>
+                </div>
+              </div>
+              <a href="/apply" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-4 rounded-lg text-center block transition duration-300 no-underline mt-auto">
+                Apply Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Provider Comparison -->
+    <section class="py-10 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-gray-900 text-3xl md:text-4xl font-bold text-center mb-8 ">
+          Provider Comparison Guide
+        </h2>
+        <div class="overflow-x-auto">
+          <table class="w-full bg-white rounded-lg shadow-lg">
+            <thead class="bg-blue-600 text-white">
+              <tr>
+                <th class="p-4 text-left">Provider</th>
+                <th class="p-4 text-center">Network</th>
+                <th class="p-4 text-center">Data Plan</th>
+                <th class="p-4 text-center">Phone Included</th>
+                <th class="p-4 text-center">Coverage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-gray-200">
+                <td class="p-4 font-semibold text-gray-900">Assurance Wireless</td>
+                <td class="p-4 text-center text-gray-900">T-Mobile</td>
+                <td class="p-4 text-center text-gray-900">Unlimited</td>
+                <td class="p-4 text-center text-gray-900">✓ Yes</td>
+                <td class="p-4 text-center text-gray-900">Nationwide</td>
+              </tr>
+              <tr class="border-b border-gray-200 bg-gray-50">
+                <td class="p-4 font-semibold text-gray-900">SafeLink Wireless</td>
+                <td class="p-4 text-center text-gray-900">Verizon</td>
+                <td class="p-4 text-center text-gray-900">Unlimited</td>
+                <td class="p-4 text-center text-gray-900">✓ Yes</td>
+                <td class="p-4 text-center text-gray-900">Nationwide</td>
+              </tr>
+              <tr class="border-b border-gray-200">
+                <td class="p-4 font-semibold text-gray-900">Q Link Wireless</td>
+                <td class="p-4 text-center text-gray-900">T-Mobile</td>
+                <td class="p-4 text-center text-gray-900">Unlimited</td>
+                <td class="p-4 text-center text-gray-900">✓ Yes</td>
+                <td class="p-4 text-center text-gray-900">Nationwide</td>
+              </tr>
+              <tr class="border-b border-gray-200 bg-gray-50">
+                <td class="p-4 font-semibold text-gray-900">TruConnect</td>
+                <td class="p-4 text-center text-gray-900">T-Mobile</td>
+                <td class="p-4 text-center text-gray-900">Unlimited</td>
+                <td class="p-4 text-center text-gray-900">✓ Yes</td>
+                <td class="p-4 text-center text-gray-900">Nationwide</td>
+              </tr>
+              <tr class="border-b border-gray-200">
+                <td class="p-4 font-semibold text-gray-900">Access Wireless</td>
+                <td class="p-4 text-center text-gray-900">Verizon</td>
+                <td class="p-4 text-center text-gray-900">Unlimited</td>
+                <td class="p-4 text-center text-gray-900">✓ Yes</td>
+                <td class="p-4 text-center text-gray-900">Nationwide</td>
+              </tr>
+              <tr class="bg-gray-50">
+                <td class="p-4 font-semibold text-gray-900">Life Wireless</td>
+                <td class="p-4 text-center text-gray-900">AT&T</td>
+                <td class="p-4 text-center text-gray-900">Unlimited</td>
+                <td class="p-4 text-center text-gray-900">✓ Yes</td>
+                <td class="p-4 text-center text-gray-900">Nationwide</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Network Coverage -->
+    <section class="py-10">
+      <div class="container mx-auto px-4">
+        <h2 class="text-gray-900 text-3xl md:text-4xl font-bold text-center mb-8 ">
+          Network Coverage & Quality
+        </h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="text-center">
+            <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-900">
+              <span class="text-gray-900 text-2xl">📶</span>
+            </div>
+            <h3 class="text-gray-900 text-xl font-bold mb-3 ">Nationwide Coverage</h3>
+            <p class="text-gray-900">
+              All providers offer extensive nationwide coverage, ensuring you stay connected wherever you go.
+            </p>
+          </div>
+          <div class="text-center">
+            <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-900">
+              <span class="text-gray-900 text-2xl">⚡</span>
+            </div>
+            <h3 class="text-gray-900 text-xl font-bold mb-3 ">High-Speed Data</h3>
+            <p class="text-gray-900">
+              Enjoy fast 4G LTE and 5G network speeds for streaming, browsing, and staying connected.
+            </p>
+          </div>
+          <div class="text-center">
+            <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-900">
+              <span class="text-gray-900 text-2xl">🔒</span>
+            </div>
+            <h3 class="text-gray-900 text-xl font-bold mb-3 ">Reliable Service</h3>
+            <p class="text-gray-900">
+              Trusted networks with excellent call quality and consistent data performance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to Choose -->
+    <section class="py-10 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-gray-900 text-3xl md:text-4xl font-bold text-center mb-8 ">
+          How to Choose Your Provider
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          <div class="bg-white rounded-lg p-6 text-center">
+            <div class="text-blue-600 text-3xl mb-4 text-gray-900">1</div>
+            <h3 class="text-gray-900 text-lg font-bold mb-3 ">Check Coverage</h3>
+            <p class="text-gray-900 text-sm">
+              Verify that your chosen provider offers strong coverage in your area.
+            </p>
+          </div>
+          <div class="bg-white rounded-lg p-6 text-center">
+            <div class="text-green-600 text-3xl mb-4 text-gray-900">2</div>
+            <h3 class="text-gray-900 text-lg font-bold mb-3 ">Compare Features</h3>
+            <p class="text-gray-900 text-sm">
+              Look at data limits, phone models, and additional benefits offered.
+            </p>
+          </div>
+          <div class="bg-white rounded-lg p-6 text-center">
+            <div class="text-purple-600 text-3xl mb-4 text-gray-900">3</div>
+            <h3 class="text-gray-900 text-lg font-bold mb-3 ">Read Reviews</h3>
+            <p class="text-gray-900 text-sm">
+              Check customer reviews and ratings for service quality and support.
+            </p>
+          </div>
+          <div class="bg-white rounded-lg p-6 text-center">
+            <div class="text-orange-600 text-3xl mb-4 text-gray-900">4</div>
+            <h3 class="text-gray-900 text-lg font-bold mb-3 ">Apply Online</h3>
+            <p class="text-gray-900 text-sm">
+              Complete your application through our secure online portal.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-10">
+      <div class="container mx-auto px-4">
+        <h2 class="text-gray-900 text-3xl md:text-4xl font-bold text-center mb-8 ">
+          Provider Questions
+        </h2>
+        <div class="max-w-3xl mx-auto space-y-4">
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-gray-900 text-lg font-bold mb-3 ">Can I switch providers after getting approved?</h3>
+            <p class="text-gray-900">
+              Yes, you can transfer your benefits to a different provider, but you may need to wait a certain period between transfers.
+            </p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-gray-900 text-lg font-bold mb-3 ">Do all providers offer the same benefits?</h3>
+            <p class="text-gray-900">
+              While all providers offer the basic Lifeline and ACP benefits, some may provide additional features or better phone models.
+            </p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-gray-900 text-lg font-bold mb-3 ">What if I'm not satisfied with my provider?</h3>
+            <p class="text-gray-900">
+              You can contact customer service to resolve issues or transfer your benefits to another approved provider.
+            </p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-gray-900 text-lg font-bold mb-3 ">Are there any hidden fees with these providers?</h3>
+            <p class="text-gray-900">
+              No, government phone providers cannot charge additional fees for the basic Lifeline and ACP benefits.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-blue-600 text-white py-10">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-gray-900 text-3xl md:text-4xl font-bold mb-6 ">
+          Ready to Choose Your Provider?
+        </h2>
+        <p class="text-gray-900 text-xl mb-8 max-w-2xl mx-auto">
+          Compare the best government phone providers and find the perfect match for your needs. 
+          All providers offer free service with no hidden costs.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/apply" class="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-lg text-lg transition duration-300 inline-block text-center no-underline">
+            Apply Now
+          </a>
+          <a href="/eligibility" class="bg-transparent border-2 border-white hover:bg-white hover:text-blue-600 text-white font-bold py-4 px-8 rounded-lg text-lg transition duration-300 inline-block text-center no-underline">
+            Check Eligibility
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Resources -->
+    <section class="py-10 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-gray-900 text-3xl md:text-4xl font-bold text-center mb-8 ">
+          Learn More About Government Phone Programs
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          <a href="/lifeline-program" class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+            <div class="text-blue-600 text-3xl mb-3" aria-label="Phone icon">📱</div>
+            <h3 class="text-gray-900 font-bold mb-2 text-blue-600">Lifeline Program</h3>
+            <p class="text-gray-900 text-sm ">Learn about the federal Lifeline program and its benefits.</p>
+          </a>
+          <a href="/acp-program" class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+            <div class="text-green-600 text-3xl mb-3" aria-label="Computer icon">💻</div>
+            <h3 class="text-gray-900 font-bold mb-2 text-green-600">ACP Program</h3>
+            <p class="text-gray-900 text-sm ">Discover the Affordable Connectivity Program benefits.</p>
+          </a>
+          <a href="/programs" class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+            <div class="text-purple-600 text-3xl mb-3" aria-label="Document icon">📋</div>
+            <h3 class="text-gray-900 font-bold mb-2 text-purple-600">All Programs</h3>
+            <p class="text-gray-900 text-sm ">Compare all available government assistance programs.</p>
+          </a>
+          <a href="/faq" class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+            <div class="text-orange-600 text-3xl mb-3" aria-label="Question mark icon">❓</div>
+            <h3 class="text-gray-900 font-bold mb-2 text-orange-600">FAQ</h3>
+            <p class="text-gray-900 text-sm ">Find answers to common questions about providers and programs.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout> 

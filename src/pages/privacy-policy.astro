@@ -1,0 +1,106 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getSiteName, getDomain, getOwnerEmail } from '../lib/site-config';
+import { generatePrivacyPolicy } from '../lib/legal-content-generator';
+import { getDesignDNA } from '../lib/site-config';
+const designDNA = getDesignDNA();
+
+const siteName = getSiteName();
+const domain = getDomain();
+const ownerEmail = getOwnerEmail();
+
+// Generate unique privacy policy for this domain
+const privacyContent = generatePrivacyPolicy({
+  domain,
+  siteName,
+  ownerEmail
+});
+
+// Convert markdown to HTML (simple conversion)
+const htmlContent = privacyContent
+  .replace(/^# (.+)$/gm, '<h1 class="text-4xl font-bold mb-6 text-slate-900" style={`color: ${designDNA.colors.text};`}>$1</h1>')
+  .replace(/^## (.+)$/gm, '<h2 class="text-2xl font-bold mt-8 mb-4 text-slate-800" style={`color: ${designDNA.colors.text};`}>$2</h2>')
+  .replace(/^### (.+)$/gm, '<h3 class="text-xl font-semibold mt-6 mb-3 text-slate-700" style={`color: ${designDNA.colors.text};`}>$3</h3>')
+  .replace(/^\*\*(.+)\*\*$/gm, '<p class="font-bold text-slate-900 mt-4" style={`color: ${designDNA.colors.text};`}>$1</p>')
+  .replace(/^\*(.+)$/gm, '<p class="italic text-slate-600 mt-2" style={`color: ${designDNA.colors.text};`}>$1</p>')
+  .replace(/^- (.+)$/gm, '<li class="ml-6 mb-2" style={`color: ${designDNA.colors.text};`}>$1</li>')
+  .replace(/\n\n/g, '</p><p class="mb-4 text-slate-700 leading-relaxed" style={`color: ${designDNA.colors.text};`}>')
+  .replace(/^([^<\n].+)$/gm, '<p class="mb-4 text-slate-700 leading-relaxed" style={`color: ${designDNA.colors.text};`}>$1</p>')
+  .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+  .replace(/---\n\n/g, '<hr class="my-8 border-slate-300" />');
+---
+
+<Layout title={`Privacy Policy - ${siteName}`} description={`Privacy Policy for ${siteName}. Learn how we collect, use, and protect your personal information.`}>
+  <div class="min-h-screen bg-gradient-to-b from-slate-50 to-white py-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Breadcrumb -->
+      <nav class="mb-8" style={`color: ${designDNA.colors.text};`}>
+        <ol class="flex items-center space-x-2 text-sm text-slate-600">
+          <li><a href="/" class="hover:text-slate-900 transition-colors">Home</a></li>
+          <li><span class="mx-2" style={`color: ${designDNA.colors.text};`}>/</span></li>
+          <li class="text-slate-900 font-medium">Privacy Policy</li>
+        </ol>
+      </nav>
+
+      <!-- Content Card -->
+      <article class="bg-white rounded-2xl shadow-lg p-6 md:p-12">
+        <div class="prose prose-slate max-w-none legal-content">
+          <Fragment set:html={htmlContent} />
+        </div>
+      </article>
+
+      <!-- Back to Home -->
+      <div class="mt-8 text-center">
+        <a 
+          href="/" 
+          class="inline-flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+          </svg>
+          Back to Home
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .legal-content h1 {
+    @apply text-4xl font-bold mb-6 text-slate-900;
+  }
+  
+  .legal-content h2 {
+    @apply text-2xl font-bold mt-8 mb-4 text-slate-800;
+  }
+  
+  .legal-content h3 {
+    @apply text-xl font-semibold mt-6 mb-3 text-slate-700;
+  }
+  
+  .legal-content p {
+    @apply mb-4 text-slate-700 leading-relaxed;
+  }
+  
+  .legal-content ul, .legal-content ol {
+    @apply mb-4 ml-6;
+  }
+  
+  .legal-content li {
+    @apply mb-2 text-slate-700;
+  }
+  
+  .legal-content strong {
+    @apply font-semibold text-slate-900;
+  }
+  
+  .legal-content hr {
+    @apply my-8 border-slate-300;
+  }
+  
+  .legal-content a {
+    @apply hover:text-blue-800 underline;
+  }
+</style>
+
+

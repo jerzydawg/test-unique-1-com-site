@@ -1,0 +1,268 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AboveFoldCTA from '../components/AboveFoldCTA.astro';
+import { getSiteURL, getSiteName, getDomain, getKeywordId } from '../lib/site-config';
+import { loadKeywordVariations } from '../lib/variations/shared/keyword-loader';
+
+const SITE_URL = getSiteURL();
+const SITE_NAME = getSiteName();
+const DOMAIN = getDomain();
+const keywordId = getKeywordId();
+
+// Load keyword-specific variations with error handling
+let h1Content = { h1: 'Emergency Broadband Benefit (EBB) Program' };
+let metaContent = { 
+  title: `Emergency Broadband Benefit (EBB) 2025: Transition to ACP Program | ${DOMAIN}`,
+  description: 'Learn about the Emergency Broadband Benefit (EBB) transition to ACP. Former EBB users: check your ACP eligibility, find providers, and continue receiving internet discounts. Updated for 2025.'
+};
+
+try {
+  const keywordModule = await loadKeywordVariations(keywordId);
+  if (keywordModule && typeof keywordModule.getH1Variation === 'function' && typeof keywordModule.getMetaVariations === 'function') {
+    try {
+      h1Content = keywordModule.getH1Variation(DOMAIN, 'emergency-broadband');
+      metaContent = keywordModule.getMetaVariations(SITE_NAME, DOMAIN, 'emergency-broadband');
+      
+      // Validate results
+      if (!h1Content || !h1Content.h1) {
+        h1Content = { h1: 'Emergency Broadband Benefit (EBB) Program' };
+      }
+      if (!metaContent || !metaContent.title || !metaContent.description) {
+        metaContent = { 
+          title: `Emergency Broadband Benefit (EBB) 2025: Transition to ACP Program | ${DOMAIN}`,
+          description: 'Learn about the Emergency Broadband Benefit (EBB) transition to ACP. Former EBB users: check your ACP eligibility, find providers, and continue receiving internet discounts. Updated for 2025.'
+        };
+      }
+    } catch (variationError: any) {
+      console.error('Error calling variation functions:', variationError?.message || variationError);
+    }
+  }
+} catch (e: any) {
+  console.error('Failed to load keyword variations for emergency broadband page:', e?.message || e);
+  // Use fallback values already set above - page will still render
+}
+
+const title = metaContent.title;
+const description = metaContent.description;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Emergency Broadband Benefit (EBB) 2025: Transition to ACP Program",
+  "description": "Learn about the Emergency Broadband Benefit (EBB) transition to ACP. Former EBB users: check your ACP eligibility, find providers, and continue receiving internet discounts. Updated for 2025.",
+  "author": {
+    "@type": "Organization",
+    "name": "Government Phone Service"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": DOMAIN,
+    "url": SITE_URL
+  },
+  "datePublished": "2025-01-01",
+  "dateModified": "2025-01-01",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `${SITE_URL}/emergency-broadband`
+  }
+};
+---
+
+<Layout title={title} description={description} canonical={`${SITE_URL}/emergency-broadband`}>
+  <Fragment slot="structured-data">
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </Fragment>
+
+  <main class="min-h-screen bg-gray-50">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-red-600 via-orange-600 to-yellow-600 text-white py-10">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-semibold mb-6 text-gray-900">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+            </svg>
+            IMPORTANT UPDATE: EBB Transitioned to ACP
+          </div>
+          
+          <h1 class="text-gray-900 text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            {h1Content.h1}
+          </h1>
+          
+          <p class="text-gray-900 text-xl md:text-2xl mb-8 leading-relaxed">
+            The Emergency Broadband Benefit (EBB) program has transitioned to the Affordable Connectivity Program (ACP). 
+            Former EBB participants can continue receiving benefits under ACP.
+          </p>
+
+          <!-- CTA Above Fold -->
+          <div class="mb-6 text-gray-900">
+            <AboveFoldCTA context="emergency-broadband" />
+          </div>
+          
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/acp-program" class="inline-flex items-center justify-center px-8 py-4 bg-white text-orange-600 rounded-lg font-bold text-lg hover:bg-gray-100 transition shadow-lg">
+              Learn About ACP
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+            <a href="/eligibility" class="inline-flex items-center justify-center px-8 py-4 bg-orange-500 text-white rounded-lg font-bold text-lg hover:bg-orange-600 transition shadow-lg">
+              Check ACP Eligibility
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-10">
+      <div class="container mx-auto px-4 max-w-4xl">
+        
+        <!-- Important Notice -->
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 mb-8 rounded-r-lg">
+          <div class="flex items-start">
+            <svg class="w-6 h-6 text-yellow-600 mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+            </svg>
+            <div>
+              <h3 class="text-gray-900 text-lg font-bold text-yellow-900 mb-2 ">Program Transition Notice</h3>
+              <p class="text-yellow-800">
+                The Emergency Broadband Benefit program officially transitioned to the <strong>Affordable Connectivity Program (ACP)</strong> 
+                on December 31, 2021. All EBB participants were automatically enrolled in ACP with no action required.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- What Happened -->
+        <div class="prose prose-lg max-w-none mb-8 text-gray-900">
+          <h2 class="text-gray-900 text-3xl font-bold mb-6 ">What Happened to the Emergency Broadband Benefit?</h2>
+          <p class="text-gray-900 leading-relaxed mb-6 ">
+            The <strong>Emergency Broadband Benefit (EBB)</strong> was a temporary program created in response to the COVID-19 pandemic 
+            to help families afford internet service. Launched in May 2021, the EBB provided eligible households with:
+          </p>
+          <ul class="list-disc pl-6 mb-6 text-gray-900 space-y-2">
+            <li>Up to $50/month discount on broadband service</li>
+            <li>Up to $75/month discount for households on Tribal lands</li>
+            <li>One-time discount of up to $100 for a laptop, desktop, or tablet</li>
+          </ul>
+          <p class="text-gray-900 leading-relaxed">
+            Due to the program's success and continued need for affordable internet access, Congress created the 
+            <strong>Affordable Connectivity Program (ACP)</strong> as a longer-term solution under the Infrastructure Investment and Jobs Act.
+          </p>
+        </div>
+
+        <!-- Transition Details -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8 text-gray-900">
+          <h2 class="text-gray-900 text-3xl font-bold mb-6 ">Transition from EBB to ACP</h2>
+          
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-gray-900 text-xl font-bold mb-2 ">Automatic Enrollment</h3>
+                <p class="text-gray-900">
+                  All EBB participants were automatically transitioned to ACP. You did not need to reapply or take any action 
+                  to continue receiving benefits.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-gray-900 text-xl font-bold mb-2 ">Benefit Changes</h3>
+                <p class="text-gray-900 mb-3 ">
+                  The monthly discount amount changed slightly with ACP:
+                </p>
+                <ul class="list-disc pl-6 text-gray-900 space-y-2">
+                  <li><strong>Standard Discount:</strong> $30/month (was $50/month under EBB)</li>
+                  <li><strong>Tribal Discount:</strong> $75/month (unchanged from EBB)</li>
+                  <li><strong>Device Discount:</strong> No longer available under ACP</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="flex-shrink-0 w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                <svg class="w-5 h-5 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-gray-900 text-xl font-bold mb-2 ">Timeline</h3>
+                <p class="text-gray-900">
+                  The transition occurred on <strong>December 31, 2021</strong>. Your provider should have notified you 
+                  of the change and any adjustments to your monthly bill.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Next Steps -->
+        <div class="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl p-6 mb-8 text-gray-900">
+          <h2 class="text-gray-900 text-3xl font-bold mb-6 ">Former EBB Participants: Your Next Steps</h2>
+          
+          <div class="space-y-4">
+            <div class="flex items-start bg-white rounded-lg p-4 shadow-sm">
+              <span class="text-gray-900 flex-shrink-0 w-8 h-8 bg-orange-600 text-white rounded-full flex items-center justify-center font-bold mr-4">1</span>
+              <div>
+                <h3 class="text-gray-900 font-bold mb-1">Verify Your ACP Enrollment</h3>
+                <p class="text-gray-900">Confirm with your provider that you're enrolled in ACP and receiving the correct discount.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start bg-white rounded-lg p-4 shadow-sm">
+              <span class="text-gray-900 flex-shrink-0 w-8 h-8 bg-orange-600 text-white rounded-full flex items-center justify-center font-bold mr-4">2</span>
+              <div>
+                <h3 class="text-gray-900 font-bold mb-1">Review Your Monthly Bill</h3>
+                <p class="text-gray-900">Check that your discount has been adjusted to $30/month (or $75/month for Tribal lands).</p>
+              </div>
+            </div>
+
+            <div class="flex items-start bg-white rounded-lg p-4 shadow-sm">
+              <span class="text-gray-900 flex-shrink-0 w-8 h-8 bg-orange-600 text-white rounded-full flex items-center justify-center font-bold mr-4">3</span>
+              <div>
+                <h3 class="text-gray-900 font-bold mb-1">Maintain Your Eligibility</h3>
+                <p class="text-gray-900">You'll need to recertify your eligibility annually to continue receiving ACP benefits.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start bg-white rounded-lg p-4 shadow-sm">
+              <span class="text-gray-900 flex-shrink-0 w-8 h-8 bg-orange-600 text-white rounded-full flex items-center justify-center font-bold mr-4">4</span>
+              <div>
+                <h3 class="text-gray-900 font-bold mb-1">Explore Additional Benefits</h3>
+                <p class="text-gray-900">You may qualify for additional programs like Lifeline, which can stack with ACP for greater savings.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="bg-gradient-to-r from-orange-600 to-red-600 rounded-xl p-6 text-center text-white">
+          <h2 class="text-gray-900 text-3xl font-bold mb-4 ">Ready to Continue Your Benefits?</h2>
+          <p class="text-gray-900 text-xl mb-6 ">Learn more about ACP and ensure you're getting maximum savings on your internet service.</p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/acp-program" class="inline-flex items-center justify-center px-8 py-4 bg-white text-orange-600 rounded-lg font-bold text-lg hover:bg-gray-100 transition">
+              View ACP Details
+            </a>
+            <a href="/eligibility" class="inline-flex items-center justify-center px-8 py-4 bg-orange-500 text-white rounded-lg font-bold text-lg hover:bg-orange-400 transition border-2 border-white">
+              Check Eligibility
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+</Layout>
