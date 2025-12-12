@@ -61,7 +61,9 @@ const canonical = `${SITE_URL}/providers`;
         </h1>
         <p class="text-gray-900 text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
           Choose from leading carriers offering free communication service through 
-          Lifeline and ACP programs. Compare coverage, features, and benefits.
+          Lifeline and ACP programs. Compare coverage, features, and benefits. 
+          Find approved federal phone assistance providers with nationwide network coverage 
+          and comprehensive service plans for eligible households.
         </p>
         <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
           <p class="text-gray-900 text-lg mb-4 ">Provider Benefits</p>
@@ -535,4 +537,33 @@ const canonical = `${SITE_URL}/providers`;
       </div>
     </section>
   </main>
+  
+  {/* Service Structured Data for Providers */}
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Free Government Phone Service",
+    "name": "Free Government Phone Providers",
+    "description": "Approved federal communication service providers offering Lifeline and ACP benefits with nationwide coverage, unlimited data plans, and free device options",
+    "provider": {
+      "@type": "Organization",
+      "name": siteName,
+      "url": SITE_URL
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "United States"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceUrl": `${SITE_URL}/apply`,
+      "serviceType": "Online Application"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "description": "Free government phone service for eligible households"
+    }
+  })} />
 </Layout> 

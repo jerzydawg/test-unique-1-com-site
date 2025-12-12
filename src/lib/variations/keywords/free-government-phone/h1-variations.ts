@@ -366,7 +366,38 @@ const ELIGIBILITY_H1S = [
   "Free Government Phone Qualification Standards",
   "Do I Qualify for Government Phone Benefits?",
   "Free Government Phone: Eligibility Overview",
-  "Government Free Phone Qualification Assessment"
+  "Government Free Phone Qualification Assessment",
+  // NEW ADDITIONS - More diverse phrasing patterns to reduce similarity
+  "Are You Eligible for Government Phone Benefits?",
+  "Check Your Government Phone Eligibility Status",
+  "Qualify for Free Government Phone Service",
+  "Lifeline & ACP Eligibility Requirements",
+  "Government Phone Program Qualification",
+  "See If You Qualify for Government Phone",
+  "Federal Phone Assistance Eligibility",
+  "Government Phone Benefits Qualification",
+  "Check Eligibility for Phone Assistance",
+  "Qualification for Government Phone Programs",
+  "Government Phone Eligibility Verification",
+  "Free Phone Service Qualification Check",
+  "Government Phone Program Requirements",
+  "Eligibility Check for Government Phone",
+  "Qualify for Government Phone Benefits",
+  "Government Phone Assistance Eligibility",
+  "Check If You Qualify for Phone Benefits",
+  "Government Phone Program Qualification Status",
+  "Eligibility for Government Phone Service",
+  "Government Phone Benefits Eligibility Check",
+  "Qualification Requirements for Phone Programs",
+  "Government Phone Eligibility Assessment",
+  "Check Your Phone Program Eligibility",
+  "Government Phone Service Qualification",
+  "Eligibility Verification for Phone Benefits",
+  "Qualify for Government Phone Assistance",
+  "Government Phone Program Eligibility Check",
+  "Phone Benefits Eligibility Requirements",
+  "Government Phone Qualification Process",
+  "Check Eligibility for Phone Programs"
 ];
 
 // ============================================================================
@@ -571,7 +602,27 @@ const CONTACT_H1S = [
   "Contact Government Free Phone Team",
   "Free Government Phone Assistance Support",
   "Free Government Phone Contact Options",
-  "Reach Out About Free Government Phone"
+  "Reach Out About Free Government Phone",
+  "Need Help? Contact Free Government Phone",
+  "Free Government Phone Support Available",
+  "Contact Our Free Phone Support Team",
+  "Get Assistance with Free Government Phone",
+  "Free Government Phone Help & Support",
+  "Contact Us: Free Government Phone Questions",
+  "Free Government Phone Customer Care",
+  "Reach Our Free Phone Support Team",
+  "Free Government Phone Assistance Available",
+  "Contact Free Phone Program Support",
+  "Get Help: Free Government Phone Service",
+  "Free Government Phone Support Services",
+  "Contact Team for Free Government Phone",
+  "Free Government Phone Help & Information",
+  "Need Support? Contact Free Government Phone",
+  "Free Government Phone Assistance Team",
+  "Contact Support for Free Phone Benefits",
+  "Get Free Government Phone Help & Support",
+  "Free Government Phone Contact & Support",
+  "Reach Support Team for Free Government Phone"
 ];
 
 // ============================================================================
@@ -628,7 +679,47 @@ const LIFELINE_H1S = [
   "Lifeline Free Government Phone Support",
   "Apply for Federal Lifeline Free Government Phone",
   "Lifeline Free Government Phone Program Details",
-  "Free Government Phone Through Lifeline Assistance"
+  "Free Government Phone Through Lifeline Assistance",
+  "Lifeline Assistance: Free Government Phone Program",
+  "Federal Lifeline: Free Government Phone Service",
+  "Lifeline Program Free Government Phone Enrollment",
+  "Get Your Free Government Phone via Lifeline",
+  "Lifeline Free Government Phone Federal Program",
+  "Free Government Phone Lifeline Assistance Benefits",
+  "Lifeline Program: Free Government Phone Access",
+  "Lifeline Free Government Phone Federal Assistance",
+  "Apply Now: Lifeline Free Government Phone",
+  "Lifeline Free Government Phone Program Guide",
+  "Free Government Phone Through Federal Lifeline",
+  "Lifeline Program: Free Government Phone Support",
+  "Lifeline Free Government Phone Federal Benefits",
+  "Get Free Government Phone with Lifeline Program",
+  "Lifeline Free Government Phone Service Benefits",
+  "Free Government Phone Lifeline Federal Assistance",
+  "Lifeline Program Free Government Phone Guide",
+  "Lifeline Free Government Phone Federal Service",
+  "Access Free Government Phone via Lifeline",
+  "Lifeline Program: Free Government Phone Enrollment",
+  "Lifeline Free Government Phone Program Access",
+  "Free Government Phone Through Lifeline Federal",
+  "Lifeline Free Government Phone Federal Enrollment",
+  "Lifeline Program: Free Government Phone Benefits",
+  "Get Free Government Phone Through Lifeline Federal",
+  "Lifeline Free Government Phone Program Support",
+  "Free Government Phone Lifeline Program Guide",
+  "Lifeline Free Government Phone Federal Access",
+  "Lifeline Program Free Government Phone Federal",
+  "Free Government Phone via Lifeline Federal Program",
+  "Lifeline Free Government Phone Program Federal",
+  "Lifeline Assistance Program: Free Government Phone",
+  "Federal Lifeline: Free Government Phone Benefits",
+  "Lifeline Program: Free Government Phone Federal",
+  "Free Government Phone Through Lifeline Program",
+  "Lifeline Free Government Phone Federal Program Guide",
+  "Lifeline Program Free Government Phone Federal Benefits",
+  "Get Free Government Phone via Lifeline Federal",
+  "Lifeline Free Government Phone Program Federal Benefits",
+  "Free Government Phone Lifeline Federal Program Access"
 ];
 
 // ============================================================================
@@ -1291,12 +1382,87 @@ const EMERGENCY_BROADBAND_H1S = [
 ];
 
 // ============================================================================
+// CITY PAGE H1 VARIATIONS (60+)
+// ============================================================================
+
+const CITY_H1S = [
+  "Free Government Phone in {city}, {state}",
+  "{city}, {state} Free Phone Programs",
+  "Get Your Free Phone in {city}, {state}",
+  "{city} Free Government Phone Benefits",
+  "Free Phones for {city}, {state} Residents",
+  "{city}, {state} Lifeline & ACP Programs",
+  "Free Phone Service in {city}, {state}",
+  "{city} Free Phone Options",
+  "Free Government Phone Programs in {city}, {state}",
+  "{city} Residents: Get Free Phones",
+  "Free Phone Benefits Available in {city}, {state}",
+  "{city}, {state} Free Government Phone Service",
+  "Apply for Free Phones in {city}, {state}",
+  "{city} Free Phone Eligibility",
+  "Free Government Phone Service for {city}, {state}",
+  "{city} Free Phone Application",
+  "Get Free Phones in {city}, {state} Today",
+  "{city}, {state} Free Phone Program Benefits",
+  "Free Phone Programs Serving {city}, {state}",
+  "{city} Free Government Phone Options",
+  "Free Phones Available in {city}, {state}",
+  "{city}, {state} Free Phone Service Programs",
+  "Free Government Phone Benefits in {city}, {state}",
+  "{city} Free Phone Service Available",
+  "Free Phone Service Programs in {city}, {state}",
+  "{city}, {state} Free Government Phone Plans",
+  "Free Phones for {city} Households",
+  "{city} Free Phone Service Benefits",
+  "Free Government Phone Service in {city}, {state}",
+  "{city}, {state} Free Phone Program Information",
+  "Free Phone Benefits for {city}, {state} Residents",
+  "{city} Free Government Phone Services",
+  "Free Phone Programs in {city}, {state}",
+  "{city}, {state} Free Phone Service Options",
+  "Free Government Phones Available in {city}, {state}",
+  "{city} Free Phone Benefits Program",
+  "Free Phone Service for {city}, {state} Residents",
+  "{city}, {state} Free Government Phone Eligibility",
+  "Free Phones in {city}, {state} - Apply Now",
+  "{city} Free Phone Service Programs Available",
+  "Free Government Phone Programs for {city}, {state}",
+  "{city}, {state} Free Phone Service Information",
+  "Free Phone Benefits in {city}, {state}",
+  "{city} Free Government Phone Application",
+  "Free Phone Service Available in {city}, {state}",
+  "{city}, {state} Free Phone Programs and Benefits",
+  "Free Government Phones for {city} Families",
+  "{city}, {state} Free Phone Service Eligibility",
+  "Free Phone Programs Available in {city}, {state}",
+  "{city}, {state} Free Government Phone Service Plans",
+  "Free Phones Available for {city}, {state} Residents",
+  "{city} Free Phone Service and Benefits",
+  "Free Government Phone Options in {city}, {state}",
+  "{city}, {state} Free Phone Service Application",
+  "Free Phone Benefits Available in {city}, {state}",
+  "{city} Free Government Phone Programs Available",
+  "Free Phone Service for {city} Households",
+  "{city}, {state} Free Phone Programs Information",
+  "Free Government Phones Serving {city}, {state}",
+  "{city} Free Phone Service Plans",
+  "Free Phone Programs for {city}, {state} Residents",
+  "{city}, {state} Free Government Phone Benefits Available",
+  "Free Phone Service in {city}, {state} - Apply Today",
+  "{city} Free Phone Programs and Service",
+  "Free Government Phone Service Available in {city}, {state}",
+  "{city}, {state} Free Phone Service and Eligibility",
+];
+
+// ============================================================================
 // MAIN EXPORT FUNCTION
 // ============================================================================
 
 export function getH1Variation(
   domain: string,
-  pageType: 'home' | 'eligibility' | 'apply' | 'faq' | 'providers' | 'programs' | 'contact' | 'lifeline' | 'acp' | 'tribal' | 'state-programs' | 'emergency-broadband'
+  pageType: 'home' | 'eligibility' | 'apply' | 'faq' | 'providers' | 'programs' | 'contact' | 'lifeline' | 'acp' | 'tribal' | 'state-programs' | 'emergency-broadband' | 'city',
+  cityName?: string,
+  stateAbbr?: string
 ): { h1: string } {
   let variations: string[];
   
@@ -1334,11 +1500,27 @@ export function getH1Variation(
     case 'emergency-broadband':
       variations = EMERGENCY_BROADBAND_H1S;
       break;
+    case 'city':
+      variations = CITY_H1S;
+      break;
     default:
       variations = HOMEPAGE_H1S;
   }
   
-  return { h1: selectVariation(domain, variations, `h1-${pageType}`) };
+  // Include city/state in hash salt for city pages to ensure uniqueness per location
+  let salt = '';
+  if (pageType === 'city' && cityName && stateAbbr) {
+    salt = `${cityName}-${stateAbbr}`;
+  }
+  
+  let h1 = selectVariation(domain, variations, `h1-${pageType}`, salt);
+  
+  // Replace placeholders for city pages
+  if (pageType === 'city' && cityName && stateAbbr) {
+    h1 = h1.replace(/\{city\}/g, cityName).replace(/\{state\}/g, stateAbbr);
+  }
+  
+  return { h1 };
 }
 
 

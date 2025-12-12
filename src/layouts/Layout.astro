@@ -49,8 +49,12 @@ const currentPath = Astro.url.pathname;
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
     
     <!-- Critical CSS Inlined for Faster Rendering -->
     <style set:html={criticalCSS} />
@@ -106,6 +110,11 @@ const currentPath = Astro.url.pathname;
   </head>
   
   <body class="font-sans antialiased bg-white overflow-x-hidden">
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-blue-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg">
+      Skip to main content
+    </a>
+    
     <!-- Mobile Slide-out Menu Overlay -->
     <div id="menu-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-50 opacity-0 pointer-events-none transition-opacity duration-300 md:hidden"></div>
     
@@ -151,7 +160,7 @@ const currentPath = Astro.url.pathname;
         
         <!-- Menu Footer -->
         <div class="p-6 border-t border-gray-200">
-            <a href="/apply" rel="noreferrer" class="block w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold py-4 px-6 rounded-xl shadow-lg text-center transition-all transform hover:scale-105 text-shadow-sm">
+            <a href="/apply" rel="noopener noreferrer" class="block w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold py-4 px-6 rounded-xl shadow-lg text-center transition-all transform hover:scale-105 text-shadow-sm">
             {mobileMenu.ctaButton}
           </a>
           <p class="text-gray-900 text-xs  text-center mt-3">{mobileMenu.ctaSubtext}</p>
@@ -194,7 +203,7 @@ const currentPath = Astro.url.pathname;
             {navContent.navItems.map((item) => (
               <a href={item.href} class="nav-link text-gray-900 font-medium transition-colors duration-200">{item.label}</a>
             ))}
-            <a href="/apply" rel="noreferrer" class="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200 text-shadow-sm">{navContent.ctaText}</a>
+            <a href="/apply" rel="noopener noreferrer" class="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200 text-shadow-sm">{navContent.ctaText}</a>
           </div>
         </div>
       </div>
@@ -209,7 +218,7 @@ const currentPath = Astro.url.pathname;
     </div>
 
     <!-- Main Content -->
-    <main>
+    <main id="main-content">
       <slot />
     </main>
 

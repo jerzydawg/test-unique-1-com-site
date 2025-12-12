@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://test-unique-1.com/sitemap.xml

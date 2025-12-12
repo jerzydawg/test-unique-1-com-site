@@ -67,7 +67,8 @@ const canonical = `${SITE_URL}/faq`;
         </h1>
         <p class="text-gray-900 text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
           Discover answers to frequently asked questions about federal communication assistance programs, 
-          qualification criteria, and application procedures.
+          qualification criteria, and application procedures. Learn about Lifeline and ACP benefits, 
+          eligibility requirements, and how to access telecommunications support through government programs.
         </p>
       </div>
     </section>
@@ -176,4 +177,20 @@ const canonical = `${SITE_URL}/faq`;
       </div>
     </section>
   </main>
+  
+  {/* FAQPage Structured Data */}
+  {faqContent && faqContent.sections && faqContent.sections.eligibility && faqContent.sections.eligibility.faqs && faqContent.sections.eligibility.faqs.length > 0 && (
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqContent.sections.eligibility.faqs.map((faq: any) => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
+    })} />
+  )}
 </Layout> 

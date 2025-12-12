@@ -1,14 +1,32 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getSiteName, getKeyword, getDomain, getSiteURL } from '../lib/site-config';
+import { getSiteName, getKeyword, getDomain, getSiteURL, getKeywordId } from '../lib/site-config';
+import { loadKeywordVariations } from '../lib/variations/shared/keyword-loader';
 
 const siteName = getSiteName();
 const keyword = getKeyword();
 const domain = getDomain();
 const siteURL = getSiteURL();
+const keywordId = getKeywordId();
 
-const title = "Apply for Free Government Phone in 2 Minutes - Test Unique Site 1";
-const description = "Get approved for your free government phone instantly. Simple 2-minute application with same-day approval. No credit check required. Start your application now.";
+// Load keyword-specific variations (H1, Meta) with error handling
+let h1Content = { h1: `Apply for ${keyword}` };
+let metaContent = { 
+  title: `Apply for ${keyword} in 2 Minutes - ${siteName}`,
+  description: `Get approved for your free government phone instantly. Simple 2-minute application with same-day approval. No credit check required. Start your application now.`
+};
+
+try {
+  const { getH1Variation, getMetaVariations } = await loadKeywordVariations(keywordId);
+  h1Content = getH1Variation(domain, 'apply');
+  metaContent = getMetaVariations(siteName, domain, 'apply');
+} catch (e) {
+  console.error('Failed to load keyword variations for apply page:', e);
+  // Will use fallback values above
+}
+
+const title = metaContent.title;
+const description = metaContent.description;
 const canonical = `${siteURL}/apply`;
 
 const jsonLd = {
@@ -80,7 +98,7 @@ const faqJsonLd = {
   <main class="container mx-auto px-4 py-8">
     <!-- Hero Section -->
     <section class="text-center mb-12">
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Free Government Phone</h1>
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">{h1Content.h1}</h1>
       <p class="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
         Get your free smartphone with unlimited talk, text, and data in just 2 minutes. No credit check, no monthly bills, no hidden fees.
       </p>

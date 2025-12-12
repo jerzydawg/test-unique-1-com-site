@@ -1,14 +1,32 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getSiteName, getKeyword, getDomain, getSiteURL } from '../lib/site-config';
+import { getSiteName, getKeyword, getDomain, getSiteURL, getKeywordId } from '../lib/site-config';
+import { loadKeywordVariations } from '../lib/variations/shared/keyword-loader';
 
 const siteName = getSiteName();
 const keyword = getKeyword();
 const domain = getDomain();
 const siteURL = getSiteURL();
+const keywordId = getKeywordId();
 
-const title = `Contact Us - Get Help With Your ${keyword} Application`;
-const description = `Need help with your free government phone application? Contact Test Unique Site 1 for immediate assistance. Get support for Lifeline and ACP programs today.`;
+// Load keyword-specific variations (H1, Meta) with error handling
+let h1Content = { h1: `Contact Us About ${keyword}` };
+let metaContent = { 
+  title: `Contact Us - Get Help With Your ${keyword} Application`,
+  description: `Need help with your free government phone application? Contact Test Unique Site 1 for immediate assistance. Get support for Lifeline and ACP programs today.`
+};
+
+try {
+  const { getH1Variation, getMetaVariations } = await loadKeywordVariations(keywordId);
+  h1Content = getH1Variation(domain, 'contact');
+  metaContent = getMetaVariations(siteName, domain, 'contact');
+} catch (e) {
+  console.error('Failed to load keyword variations for contact page:', e);
+  // Will use fallback values above
+}
+
+const title = metaContent.title;
+const description = metaContent.description;
 const canonicalURL = `${siteURL}/contact`;
 
 const jsonLD = {
@@ -82,7 +100,7 @@ const faqSchema = {
     <!-- Header Section -->
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
       <div class="text-center">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Free Government Phone</h1>
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">{h1Content.h1}</h1>
         <p class="text-xl text-gray-600 max-w-3xl mx-auto">
           Need help with your application or have questions about getting your free phone? Our support team is here to help you every step of the way.
         </p>

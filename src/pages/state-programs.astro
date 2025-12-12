@@ -116,7 +116,8 @@ const faqData = {
 };
 ---
 
-<Layout title={title} description={description}>
+const canonicalURL = `${siteURL}/state-programs/`;
+<Layout title={title} description={description} canonicalURL={canonicalURL}>
   <!-- Structured Data for Article -->
   <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   <!-- FAQ Schema -->
@@ -140,7 +141,7 @@ const faqData = {
     <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-8 text-gray-900">
       <p class="text-blue-800 font-medium">
         <strong>Pro Tip:</strong> Many states offer additional communication assistance programs beyond federal benefits. 
-        <a href="/apply" rel="noreferrer" class="text-blue-600 hover:underline">Verify your eligibility</a> to maximize your savings!
+        <a href="/apply" rel="noopener noreferrer" class="text-blue-600 hover:underline">Verify your eligibility</a> to maximize your savings!
       </p>
     </div>
 
@@ -226,7 +227,7 @@ const faqData = {
       <div class="bg-gradient-to-r from-green-500 to-blue-500 text-white p-6 rounded-lg mb-6 text-gray-900">
         <h3 class="text-gray-900 text-xl font-medium mb-4 ">Step-by-Step Guide to Finding State Benefits</h3>
         <ol class="list-decimal list-inside space-y-3 text-lg">
-          <li><strong>Check Federal Eligibility:</strong> <a href="/apply" rel="noreferrer" class="text-yellow-200 hover:underline">Verify your eligibility</a> for Lifeline and ACP first</li>
+          <li><strong>Check Federal Eligibility:</strong> <a href="/apply" rel="noopener noreferrer" class="text-yellow-200 hover:underline">Verify your eligibility</a> for Lifeline and ACP first</li>
           <li><strong>Research Your State:</strong> Visit your state's public utility commission website</li>
           <li><strong>Contact Local Providers:</strong> <a href="/providers" class="text-yellow-200 hover:underline">Find providers</a> in your area for state program details</li>
           <li><strong>Apply for Benefits:</strong> Complete applications for both federal and state programs</li>
@@ -300,7 +301,7 @@ const faqData = {
         
         <div class="border border-gray-200 rounded-lg p-6">
           <h3 class="text-gray-900 text-xl font-medium mb-3 ">How do I find my state's program?</h3>
-          <p class="text-gray-900">To find your state's program, check your state's public utility commission website, contact local providers, or use our <a href="/apply" rel="noreferrer" class="text-blue-600 hover:underline">eligibility checker</a> to see what programs you qualify for in your area.</p>
+          <p class="text-gray-900">To find your state's program, check your state's public utility commission website, contact local providers, or use our <a href="/apply" rel="noopener noreferrer" class="text-blue-600 hover:underline">eligibility checker</a> to see what programs you qualify for in your area.</p>
         </div>
         
         <div class="border border-gray-200 rounded-lg p-6">
@@ -319,7 +320,7 @@ const faqData = {
       <h2 class="text-gray-900 text-2xl font-bold mb-4 ">Maximize Your Savings</h2>
       <p class="text-gray-900 text-lg mb-6 ">Don't miss out on additional benefits available in your state! Combine federal and state programs for maximum savings.</p>
       <div class="flex justify-center">
-        <a href="/apply" rel="noreferrer" class="block md:inline-block w-full md:w-auto max-w-md md:max-w-none mx-auto py-4 px-10 text-lg font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 active:scale-95 transition-all duration-300 no-underline text-center" style={`background: linear-gradient(135deg, ${designDNA.colors.accent} 0%, ${designDNA.colors.accentDark || designDNA.colors.accent} 100%); color: white;`}>
+        <a href="/apply" rel="noopener noreferrer" class="block md:inline-block w-full md:w-auto max-w-md md:max-w-none mx-auto py-4 px-10 text-lg font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 active:scale-95 transition-all duration-300 no-underline text-center" style={`background: linear-gradient(135deg, ${designDNA.colors.accent} 0%, ${designDNA.colors.accentDark || designDNA.colors.accent} 100%); color: white;`}>
           Apply Now
         </a>
       </div>

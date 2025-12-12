@@ -107,7 +107,8 @@ const faqData = {
 };
 ---
 
-<Layout title={title} description={description}>
+const canonicalURL = `${siteURL}/lifeline-program/`;
+<Layout title={title} description={description} canonicalURL={canonicalURL}>
   <!-- Structured Data -->
   <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   <script type="application/ld+json" set:html={JSON.stringify(faqData)} />
@@ -176,7 +177,7 @@ const faqData = {
         <p class="text-gray-900 text-xl mb-8 max-w-2xl mx-auto">
           Check if you qualify for Lifeline Free Government Phone in just 2 minutes. Most Americans are eligible!
         </p>
-        <a href="/apply" rel="noreferrer" class="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold py-4 px-8 rounded-xl text-lg shadow-lg transform hover:scale-105 transition-all duration-200 inline-block text-center">
+        <a href="/apply" rel="noopener noreferrer" class="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold py-4 px-8 rounded-xl text-lg shadow-lg transform hover:scale-105 transition-all duration-200 inline-block text-center">
           CHECK ELIGIBILITY NOW
         </a>
         <p class="text-gray-900 text-sm text-blue-200 mt-6">
@@ -519,10 +520,10 @@ const faqData = {
         The application takes less than 2 minutes and you could save <strong>$111 per year</strong>.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/apply" rel="noreferrer" class="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold py-4 px-8 rounded-xl text-lg shadow-lg transform hover:scale-105 transition-all duration-200 inline-block text-center">
+        <a href="/apply" rel="noopener noreferrer" class="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold py-4 px-8 rounded-xl text-lg shadow-lg transform hover:scale-105 transition-all duration-200 inline-block text-center">
           CHECK ELIGIBILITY NOW
         </a>
-        <a href="/acp-program" rel="noreferrer" class="bg-white/20 hover:bg-white/30 text-white font-bold py-4 px-8 rounded-xl text-lg border border-white/30 transition-all duration-200 inline-block text-center">
+        <a href="/acp-program" rel="noopener noreferrer" class="bg-white/20 hover:bg-white/30 text-white font-bold py-4 px-8 rounded-xl text-lg border border-white/30 transition-all duration-200 inline-block text-center">
           LEARN ABOUT ACP
         </a>
       </div>
